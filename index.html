@@ -196,7 +196,7 @@ html,body{
             <div>
                 <div class="msj-rta macro" style="margin:auto">                        
                     <div class="text text-r" style="background:whitesmoke !important">
-                        <input class="mytext" placeholder="Type a message"/><div style=" position: absolute; font-size: 30px; right: 60px; color: #827ffe">➤</div>
+                        <input class="mytext" placeholder="Type a message"/><div style=" position: absolute; font-size: 30px; right: 60px; color: #827ffe" id="sendmessagebutton">➤</div>
                     </div> 
                 </div>
             </div>
@@ -285,6 +285,15 @@ function resetChat(){
     $("ul").empty();
 }
 
+document.getElementById("sendmessagebutton").onclick = function(){
+
+    var text = document.getElementsByClassName("mytext")[0].value;
+    if (text !== ""){
+        insertChat("you", text);              
+        document.getElementsByClassName("mytext")[0].value='';
+    }
+}
+
 $(".mytext").on("keyup", function(e){
     if (e.which == 13){
         var text = $(this).val();
@@ -294,6 +303,8 @@ $(".mytext").on("keyup", function(e){
         }
     }
 });
+
+
 
 //-- Clear Chat
 resetChat();
