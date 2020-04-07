@@ -128,6 +128,78 @@ input:focus{
 html,body{
 	overflow: hidden;
 }
+
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+  font-size: 25px;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  font-size: 25px;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+  font-size: 25px;
+}
+
+.rating label:last-child .icon {
+  color: grey;
+  font-size: 25px;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #827ffe;
+  font-size: 25px;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: grey;
+  text-shadow: 0 0 5px #827ffe;
+  font-size: 25px;
+}
 </style>
 </head>
 <body>
@@ -245,7 +317,7 @@ html,body{
 	<div id="mainpage" class="mainpage" hidden="" style="width: 100%; height: 100%">
 <div style=" opacity: .9; background: #DDD; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"></div>
 <div class="col-sm-3 col-sm-offset-4 frame" style="opacity: .9; height: 100%">
-            <ul style="position: absolute; top: 0;"></ul>
+            <ul style="position: absolute; top: 0; overflow-x: scroll; padding-bottom: 50px;"></ul>
             <div>
                 <div class="msj-rta macro" style="margin:auto">                        
                     <div class="text text-r" style="background:whitesmoke !important">
@@ -273,7 +345,42 @@ html,body{
 <!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<!-- <script src="js/main.js"></script> -->
+    <!-- <script src="js/main.js"></script> -->
+    <div id='starratingdiv' hidden>
+        <form class="rating">
+            <!-- <span>Rate your mood today</span> -->
+            <label>
+              <input type="radio" name="stars" value="1" />
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="2" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="3" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>   
+            </label>
+            <label>
+              <input type="radio" name="stars" value="4" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="5" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+          </form>
+    </div>
 
 	<script type="text/javascript">
 		document.getElementById('coverpage').onclick= function(){
@@ -295,6 +402,7 @@ html,body{
 		var me = {};
 
 var you = {};
+var starrating = document.getElementById('starratingdiv').innerHTML;
 
 function formatAMPM(date) {
     var hours = date.getHours();
@@ -335,7 +443,8 @@ function insertChat(who, text, time = 0){
     setTimeout(
         function(){                        
             $("ul").append(control);
-
+            var allchat = document.getElementsByTagName('li');
+            allchat[allchat.length-1].scrollIntoView();
         }, time);
     
 }
@@ -370,6 +479,8 @@ resetChat();
 
 //-- Print Messages
 insertChat("me", "Good Morning! How are you today?", 0);  
+insertChat("me", "Rate your mood today", 0);  
+insertChat("me", starrating, 1000);
 insertChat("you", "Not quite well because (...)", 1500);
 insertChat("me", "What would you like to talk about today?", 3500);
 insertChat("you", "Tell me a joke",7000);
