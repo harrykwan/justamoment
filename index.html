@@ -391,7 +391,8 @@ html,body{
 		function mylogin(){
             document.getElementById('createacpage').hidden = true;
 			document.getElementById('loginpage').hidden = true;
-			document.getElementById('mainpage').hidden = false;
+            document.getElementById('mainpage').hidden = false;
+            startchat()
 		}
 
         function mycreateac(){
@@ -478,16 +479,21 @@ $(".mytext").on("keyup", function(e){
 resetChat();
 
 //-- Print Messages
-insertChat("me", "Good Morning! How are you today?", 0);  
-insertChat("me", "Rate your mood today", 0);  
-insertChat("me", starrating, 1000);
-insertChat("you", "Not quite well because (...)", 1500);
-insertChat("me", "What would you like to talk about today?", 3500);
-insertChat("you", "Tell me a joke",7000);
-insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
-insertChat("you", "LOL", 12000);
-insertChat("me", "Looks like you’re unhappy now, how about a 5-km run? It should help!", 14000);
-insertChat("me", "0/ 5000m", 16000);
+function startchat(){
+    insertChat("me", "Good Morning! How are you today?", 0);  
+    insertChat("me", "Rate your mood today", 0);  
+    insertChat("me", starrating, 1000);
+    insertChat("you", "Not quite well because (...)", 3500);
+    insertChat("me", "What would you like to talk about today?", 3500);
+    insertChat("you", "Tell me a joke",7000);
+    insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
+    insertChat("you", "LOL", 12000);
+    insertChat("me", "Looks like you’re unhappy now, how about a 5-km run? It should help!", 14000);
+    insertChat("me", "0/ 5000m", 16000);
+    insertChat("you", "help -org", 17000);
+    insertChat("me", '社福機構#1<br>聯絡電話：12345578<br><br>社福機構#2<br>聯絡電話12345578<br>web: google.com', 18000);
+}
+
 
 
 	</script>
